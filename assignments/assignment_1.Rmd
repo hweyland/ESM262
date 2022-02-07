@@ -1,0 +1,12 @@
+---
+title: "ESM262_Assignment1"
+author: "Hanna Weyland"
+date: "2/6/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#paragraph here 
+```
+
