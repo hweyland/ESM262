@@ -7,6 +7,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#paragraph here 
+#paragraph here about why I am taking this course 
+
+#paragraph about my data science background
+something 
 ```
 
