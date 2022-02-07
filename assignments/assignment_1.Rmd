@@ -5,12 +5,9 @@ date: "2/6/2022"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-#paragraph here about why I am taking this course 
-# I am taking this course because I want a better understanding of how to use R in statistical analysis. 
+## Why am I taking this course?
 
-#paragraph about my data science background
-# I have minimal data science background. The most significant class I have taken is ESM 206 and GIS. 
-```
+#### I am taking this course because I want a better understanding of how to use R in general and for statistical analysis. I took ESM 206 in the past and developed a good amout of skills but I didn't take any data analysis classes after that and lost many of these skills. I would like a refresher course on these skills especially going back to the basics and redeveloping these skills in "the right way". I feel that I need a back to the basics type of course that allows me to then develop computing skills better. I personally feel like I am one of those "I can't code students" and I am hoping that this class will change that. 
 
+## What is my data science background? 
+#### I have a minimal data science background. The most significant knowledge I have of data science is ESM 206 with Allison and a few GIS classes I have taken in undergrad and with Frew. I understand some basic concepts within data science however I would love a refresher course on concepts such as what is a string or why are some things in quotes and some not? I can do some very basic things such clean_names or reading in the data but in terms of creating functions, running stats, or making plots I have lost a lot of those skills. I am hoping this course will reignite these skills I once had. 
