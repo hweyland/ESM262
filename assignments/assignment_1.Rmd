@@ -8,8 +8,9 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 #paragraph here about why I am taking this course 
+# I am taking this course because I want a better understanding of how to use R in statistical analysis. 
 
 #paragraph about my data science background
-something 
+# I have minimal data science background. The most significant class I have taken is ESM 206 and GIS. 
 ```
 
