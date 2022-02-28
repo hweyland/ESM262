@@ -1,0 +1,25 @@
+---
+title: "pop_growth"
+author: "Hanna Weyland"
+date: "2/28/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+source(here("R", "pop_growth_function.R"))
+```
+
+```{r}
+#create sample of numbers for growth equation
+pop_size <- c(5, 10, 200)
+time <- c(5, 30, 200)
+rate <- c(1)
+```
+
+```{r}
+pop_growth = exponential_growth(init_pop = pop_size, e = 2.71, t = time, r = rate)
+
+```
+
