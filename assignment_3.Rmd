@@ -1,0 +1,123 @@
+---
+title: "assignment_3"
+author: "Hanna Weyland"
+date: "2/22/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(purrr)
+library(ggpubr)
+library(here)
+```
+
+3 car types 
+
+* car A  mass 20000 kg, area 22 m^2^
+
+* car B mass 65000 kg, area 30 m^2^
+
+* car C mass 38000 kg area 22 m^2^
+
+* car D mass 5000 kg area 10 m^2^
+
+Mean highway speed is 100 km/hr 
+
+
+```{r}
+#load in function
+source(here("R", "auto_fuel_efficiency.R"))
+
+# generate dataframe for possible cars
+possible_cars = data.frame(name = c("A","B","C", "D"),
+                           mass=c(10000,65000,38000, 5000), 
+                           area = c(22,30,22,10))
+
+# convert speed to m/s
+speed_base = 100 * 0.28
+
+# add to the data structure
+possible_cars$power = auto_fuel_efficiency(V=speed_base, 
+                                 A = possible_cars$area, 
+                                 m=possible_cars$mass)
+```
+
+# Approach 1 - by hand
+```{r byhand, approach 1}
+
+possible_cars
+
+# create sample numbers to generate distribution of speeds and convert speed to m/s
+nsample = 200
+mean_speed = log(100*0.277)
+
+# assume a log normal distribution of speeds with mean 100km/hr, and standard deviation that is 10% of the mean
+speeds = rlnorm(mean=mean_speed, sd=0.1*mean_speed, nsample)
+
+# first row in possible cars matrix
+possible_cars[1,]
+
+# car A (row 1)
+powerA = auto_fuel_efficiency(V=speeds, A = possible_cars$area[1], m=possible_cars$mass[1])
+
+# car B (row 2)
+powerB = auto_fuel_efficiency(V=speeds, A = possible_cars$area[2], m=possible_cars$mass[2])
+
+# car C (row 3)
+powerC = auto_fuel_efficiency(V=speeds, A = possible_cars$area[3], m=possible_cars$mass[3])
+
+# car D (row 4)
+powerD = auto_fuel_efficiency(V=speeds, A = possible_cars$area[4], m=possible_cars$mass[4])
+
+# create one dataframe
+powerall1 = cbind.data.frame(powerA, powerB, powerC, powerD)
+colnames(powerall1)=possible_cars$name
+```
+
+# Approach 2 - pmap
+```{r withpmap, approach 2}
+
+possible_cars
+
+# create sample numbers to generate distribution of speeds and convert speed to m/s
+nsample = 200
+mean_speed = log(100*0.277)
+
+speeds = rlnorm(mean=mean_speed, sd=0.1*mean_speed, nsample)
+
+# use pmap to do the iteration
+powerall2 = pmap(list(A = possible_cars$area, m=possible_cars$mass), auto_fuel_efficiency, V=speeds)
+
+# create dataframe and add column names
+powerall2 = as.data.frame(powerall2, col.names=possible_cars$name)
+
+# use mapply and add column names 
+powerall2b = mapply(FUN=auto_fuel_efficiency, A = possible_cars$area, m=possible_cars$mass, MoreArgs = list(V=speeds))
+
+colnames(powerall2b)=possible_cars$name
+```
+
+# Approach 3 - forloop 
+```{r withforloop}
+
+possible_cars
+
+# create sample numbers to generate distribution of speeds and convert speed to m/s
+nsample = 200
+mean_speed = log(100*0.277)
+
+speeds = rlnorm(mean=mean_speed, sd=0.1*mean_speed, nsample)
+
+# create data frame 
+powerall3 = as.data.frame(matrix(nrow=length(speeds), ncol=nrow(possible_cars)))
+
+# use for loop
+for (i in 1:nrow(possible_cars)) {
+  powerall3[,i] = auto_fuel_efficiency(A=possible_cars$area[i], m=possible_cars$mass[i], V=speeds)
+}
+
+# we can add column names
+colnames(powerall3)=possible_cars$name
+```

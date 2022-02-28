@@ -1,0 +1,53 @@
+---
+title: "assignment_3"
+author: "Hanna Weyland"
+date: "2/14/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(here)
+```
+
+### Load in Automobile Power Generation Function
+
+```{r}
+source(here("R", 'auto_fuel_efficiency_function.R'))
+```
+
+
+```{r}
+#solve function for different speeds 
+
+power_df <- data.frame("power" = NA,
+                       "speed" = c(30, 22.22, 33.33, 11.11, 1.39))
+
+result$power = auto_fuel_efficiency(V = speed, m = 31752, A = 16)
+```
+
+```{r}
+#plot power as a function of speed for original car 
+ggplot(data = result, aes(x = speed, y = power)) + 
+  geom_point() +
+  theme_bw()
+```
+```{r}
+#provide 3 new estimates of power
+
+result$power_light = auto_fuel_efficiency(V = speed, m = 5000, A = 10)
+
+result$power_heavy = auto_fuel_efficiency(V = speed, m = 50000, A = 20)
+
+result$power_super = auto_fuel_efficiency(V = speed, m = 75000, A = 30)
+```
+
+```{r}
+#plot power as a function of speed for super light car 
+ggplot(data = result, aes(x = speed, y = power)) + 
+  geom_point() +
+  theme_bw()
+```
+

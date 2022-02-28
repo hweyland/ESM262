@@ -1,0 +1,56 @@
+---
+title: "looping"
+author: "Hanna Weyland"
+date: "2/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+```
+
+```{r}
+#crop yield function 
+source(here("R", 'annual_crop_yield_function.R'))
+```
+
+```{r}
+#lets look at an example
+# a = 0+1+2+3+4+5
+a=0
+for (i in 1:10) {
+ a = a+i
+}
+a
+
+#replacing a with a+i so it looks like this 0 = 0+1 which is 1 then replace a with 1 so now its 1 = 1+1 now 2... 
+
+
+a = rep(x=0, times=5) #make a list 
+for (i in 1:5) {
+ a[i] = a[i]+i
+}
+a
+
+#indexing so for the first value a[i] where it = 0 now its 0 + 1 but make it a list. you can also do a <- c() to make it a list 
+```
+
+```{r}
+#generate sample of yields from a distribution where n = 10
+nsample = 10
+fertilizer <-rnorm(mean = 5, sd = 0.5, n = nsample) # use rnorm to create a normal distribution where the mean = 5 and sd = 0.5 and n = 10 
+
+annual_yield <- c() # make a list for annual yield 
+  
+for (i in 1:10) {
+ annual_yield[i] = 1.8*fertilizer[i]^2 - 0.5*fertilizer[i]+0.3*20 
+}
+
+#forloop annual yield, index annual yield and fertilizer to correspond with the different n values you have; need the i to tell the code that you wanna go through numbers 1 through 10 
+
+sum(annual_yield) #sum annual yield to get total 
+```
+
+
+
